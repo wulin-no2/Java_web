@@ -4,11 +4,17 @@ import org.example.springbootdemo.DAO.EmpDAO;
 import org.example.springbootdemo.DAO.impl.EmpDaoA;
 import org.example.springbootdemo.pojo.Emp;
 import org.example.springbootdemo.service.EmpService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+//@Component // inversion of control. now it's a bean;
+@Service
 public class EmpServiceA implements EmpService {
-    private EmpDAO empDaoA = new EmpDaoA();
+    @Autowired // dependency injection. IOC will produce the bean with the type that it needs;
+    // private EmpDAO empDaoA = new EmpDaoA();
+    private EmpDAO empDaoA;
     @Override
     public List<Emp> listEmp() {
         List<Emp> empList = empDaoA.listEmp();

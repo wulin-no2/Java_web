@@ -3,9 +3,12 @@ package org.example.springbootdemo.DAO.impl;
 import org.example.springbootdemo.DAO.EmpDAO;
 import org.example.springbootdemo.pojo.Emp;
 import org.example.springbootdemo.utils.XmlParserUtils;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+//@Component // inversion of control. now it's a bean;
+@Repository
 public class EmpDaoA implements EmpDAO {
     @Override
     public List<Emp> listEmp() {
