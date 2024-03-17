@@ -43,9 +43,9 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public void update(Dept dept) {
-        Dept dept1 = listById(dept.getId());
-        dept1.setUpdateTime(LocalDateTime.now());
-        dept1.setName(dept.getName());
-        deptMapper.update(dept1);
+//        Dept dept1 = listById(dept.getId());
+        dept.setUpdateTime(LocalDateTime.now());
+//        dept1.setName(dept.getName());
+        deptMapper.update(dept);
     }
 }

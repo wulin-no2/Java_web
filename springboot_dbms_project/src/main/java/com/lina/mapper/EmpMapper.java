@@ -3,6 +3,7 @@ package com.lina.mapper;
 import com.lina.pojo.Emp;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +18,11 @@ public interface EmpMapper {
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
     // delete batch:
     void delete(List<Integer> ids);
-@Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+    @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
         "VALUES (#{username},#{name},#{gender},#{image},#{job},#{entrydate},#{deptId},#{createTime}, #{updateTime})")
     void save(Emp emp);
+    @Select("SELECT * from emp where id = #{id}")
+    Emp listById(Integer id);
+
+    void update(Emp emp);
 }

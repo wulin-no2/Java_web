@@ -2,6 +2,7 @@ package com.lina.service;
 
 import com.google.cloud.storage.*;
 import com.google.firebase.cloud.StorageClient;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
