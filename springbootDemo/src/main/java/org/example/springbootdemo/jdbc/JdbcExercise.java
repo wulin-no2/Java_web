@@ -1,4 +1,4 @@
-package org.example.springbootdemo.DAO.impl;
+package org.example.springbootdemo.jdbc;
 import java.sql.*;
 public class JdbcExercise {
     static final String db_url= "jdbc:mysql://localhost/MY_DB";
