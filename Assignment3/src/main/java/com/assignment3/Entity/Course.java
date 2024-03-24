@@ -3,6 +3,8 @@ package com.assignment3.Entity;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Course")
@@ -16,13 +18,16 @@ public class Course implements Serializable {
     private String courseName;
     @Column(name = "semester")
     private int semester;
+    @OneToMany(mappedBy = "course")
+    private Set<UserCourse> userCourses = new HashSet<>();
 
-    public Course() {
-    }
 
     public Course(String courseName, int semester) {
         this.courseName = courseName;
         this.semester = semester;
+    }
+
+    public Course() {
     }
 
     public void setCourseId(Long courseId) {

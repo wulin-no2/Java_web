@@ -1,6 +1,8 @@
 package com.assignment3.Entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -19,6 +21,8 @@ public class User {
     private String phone;
     @Column
     private String role;
+    @OneToMany(mappedBy = "user")
+    private Set<UserCourse> userCourses = new HashSet<>();
 
     public User() {
     }

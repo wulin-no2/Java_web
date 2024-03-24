@@ -20,7 +20,7 @@ public class AdminService {
         // Commit transaction
         em.getTransaction().commit();
 
-        // Retrieve an employee by ID
+        // Retrieve a course by ID
         Course retrievedCourse = em.find(Course.class, course.getCourseId());
         System.out.println("Course: " + retrievedCourse.getCourseName() + ", " + retrievedCourse.getSemester());
 

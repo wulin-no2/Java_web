@@ -9,10 +9,14 @@ public class Assessment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "assessment_id")
     private Long assessmentId;
-    @Column(name = "user_id")
-    private Long userId;
-    @Column(name = "course_id")
-    private Long courseId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+//    @Column(name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+//    @Column(name = "course_id")
+    private Course course;
     @Column(name = "marks")
     private Long marks;
     @Column(name = "assessment_type")
@@ -21,9 +25,9 @@ public class Assessment {
     public Assessment() {
     }
 
-    public Assessment(Long userId, Long courseId, Long marks, String assessmentType) {
-        this.userId = userId;
-        this.courseId = courseId;
+    public Assessment(User user, Course course, Long marks, String assessmentType) {
+        this.user = user;
+        this.course = course;
         this.marks = marks;
         this.assessmentType = assessmentType;
     }
@@ -32,20 +36,21 @@ public class Assessment {
         return assessmentId;
     }
 
-    public Long getUserId() {
-        return userId;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Long getMarks() {
@@ -68,8 +73,8 @@ public class Assessment {
     public String toString() {
         return "Assessment{" +
                 "assessmentId=" + assessmentId +
-                ", userId=" + userId +
-                ", courseId=" + courseId +
+                ", user=" + user +
+                ", course=" + course +
                 ", marks=" + marks +
                 ", assessmentType='" + assessmentType + '\'' +
                 '}';

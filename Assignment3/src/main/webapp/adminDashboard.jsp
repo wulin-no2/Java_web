@@ -10,7 +10,7 @@
 
 <!-- Create New User Form -->
 <h3>Create New User</h3>
-<form action="AdminCreateUserServlet" method="post">
+<form action="/Assignment3_war_exploded/AdminCreateUserServlet" method="get">
     <label for="role">Role:</label>
     <select id="role" name="role">
         <option value="student">Student</option>
@@ -44,7 +44,7 @@
     <input type="submit" value="Create Course">
     <br>
 
-    <a href="login.html">log out</a>
+    <a href="/Assignment3_war_exploded/logout">log out</a>
 </form>
 </body>
 </html>

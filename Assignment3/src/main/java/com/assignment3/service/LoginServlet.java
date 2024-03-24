@@ -27,15 +27,6 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// set session attribute to store username and password
 		HttpSession session = request.getSession();
-		// if session is not new, directly jump to dashboard;
-		// just an example for test;
-//		if (! session.isNew()) {
-//			String userNameAttribute = (String)session.getAttribute("userName");
-//			if (userNameAttribute.equals("admin")) response.sendRedirect("adminDashboard.jsp");
-//			if (userNameAttribute.equals("student")) response.sendRedirect("studentDashboard.jsp");
-//		}
-//		Date createTime = new Date(session.getCreationTime());
-//		Date lastAccessTime = new Date(session.getLastAccessedTime());
 
 		System.out.println("====================post method is running====================");
 		response.setContentType("text/html");
@@ -58,18 +49,18 @@ public class LoginServlet extends HttpServlet {
     	}//Check for valid username and password.
     	else if(userName.equals("student") && password.equals("student")){
 			session.setAttribute("userName",userName);
-			System.out.println(session.getAttribute("username"));
+			System.out.println(session.getAttribute("userName"));
 //			This is student result:
     		response.sendRedirect("studentDashboard.jsp");
     	} else if (userName.equals("admin") && password.equals("admin")) {
 			session.setAttribute("userName",userName);
-			System.out.println(session.getAttribute("username"));
+			System.out.println(session.getAttribute("userName"));
 //			This is admin dashboard:
 //			response.sendRedirect("AdminWelcomeServlet");
 			response.sendRedirect("adminDashboard.jsp");
 		} else if (userName.equals("teacher") && password.equals("teacher")) {
 			session.setAttribute("userName",userName);
-			System.out.println(session.getAttribute("username"));
+			System.out.println(session.getAttribute("userName"));
 //			This is lecturer system:
 			response.sendRedirect("LecturerWelcomeServlet");
 		} else{
