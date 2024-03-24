@@ -16,21 +16,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Student Dashboard</title>
+    <title>Teacher Dashboard</title>
 </head>
 <body>
-<h2>Student Dashboard</h2>
+<h2>Teacher Dashboard</h2>
 
 <%-- userName is stored in session after login --%>
 <% String userName = (String) session.getAttribute("userName"); %>
-<% UserService studentService = new UserService(); %>
-<% List<Course> enrolledCourses = studentService.getEnrolledCoursesByUserName(userName); %>
-<% List<Course> availableCourses = studentService.getAvailableCoursesByUserName(userName); %>
+<% UserService teacherService = new UserService(); %>
+<% List<Course> enrolledCourses = teacherService.getEnrolledCoursesByUserName(userName); %>
+<% List<Course> availableCourses = teacherService.getAvailableCoursesByUserName(userName); %>
 
 <% if(enrolledCourses.isEmpty()){ %>
-<p>You are not enrolled in any courses.</p>
+<p>You are not assigned in any courses.</p>
 <% } else { %>
-<h3>Enrolled Courses</h3>
+<h3>Assigned Courses</h3>
 <ul>
     <table border="1">
         <tr>
@@ -45,43 +45,42 @@
             <td><%= course.getCourseName() %></td>
             <td>Semester <%= course.getSemester() %></td>
             <td>
-                <form action="StudentCheckCourseMarksServlet" method="get">
+                <form action="TeacherCheckStudentServlet" method="get">
                     <input type="hidden" name="courseId" value="<%= course.getCourseId() %>">
-                    <input type="submit" value="Check Results">
+                    <input type="submit" value="Student List">
                 </form>
             </td>
         </tr>
         <% } %>
     </table>
-<% } %>
+        <% } %>
 
-<h3>Available Courses</h3>
-<p>Select a course to register:</p>
-<table border="1">
-    <tr>
-        <th>Course ID</th>
-        <th>Course Name</th>
-        <th>Semester</th>
-        <th>Operation</th>
-    </tr>
-    <% for(Course course : availableCourses){ %>
-    <tr>
-        <td><%= course.getCourseId() %></td>
-        <td><%= course.getCourseName() %></td>
-        <td>Semester <%= course.getSemester() %></td>
-        <td>
-            <form action="UserRegisterCourseServlet" method="post">
-                <input type="hidden" name="courseId" value="<%= course.getCourseId() %>">
-                <input type="submit" value="Register">
-            </form>
-        </td>
-    </tr>
-    <% } %>
-</table>
+    <h3>Available Courses</h3>
+    <p>Select a course to register:</p>
+    <table border="1">
+        <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Semester</th>
+            <th>Operation</th>
+        </tr>
+        <% for(Course course : availableCourses){ %>
+        <tr>
+            <td><%= course.getCourseId() %></td>
+            <td><%= course.getCourseName() %></td>
+            <td>Semester <%= course.getSemester() %></td>
+            <td>
+                <form action="UserRegisterCourseServlet" method="post">
+                    <input type="hidden" name="courseId" value="<%= course.getCourseId() %>">
+                    <input type="submit" value="Register">
+                </form>
+            </td>
+        </tr>
+        <% } %>
+    </table>
 
-<br>
+    <br>
 
-<a href="/Assignment3_war_exploded/logout">log out</a>
+    <a href="/Assignment3_war_exploded/logout">log out</a>
 </body>
 </html>
-

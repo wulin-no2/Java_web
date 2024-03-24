@@ -3,14 +3,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Add Assessment</title>
 </head>
 <body>
-<h2>Admin Dashboard</h2>
+<h2>Assessment of the student</h2>
 
 <!-- Create New User Form -->
-<h3>Create New User</h3>
-<form action="/Assignment3_war_exploded/AdminCreateUserServlet" method="post">
+<form action="/Assignment3_war_exploded/TeacherAddAssessmentServlet" method="post">
     <label for="role">Role:</label>
     <select id="role" name="role">
         <option value="student">Student</option>
@@ -30,8 +29,8 @@
 <!-- Create New Course Form -->
 <h3>Create New Course</h3>
 <form action="/Assignment3_war_exploded/AdminCreateCourseServlet" method="post">
-<%--    <label for="courseId">Course ID:</label>--%>
-<%--    <input type="text" id="courseId" name="courseId" required><br/>--%>
+    <%--    <label for="courseId">Course ID:</label>--%>
+    <%--    <input type="text" id="courseId" name="courseId" required><br/>--%>
     <label for="courseName">Course Name:</label>
     <input type="text" id="courseName" name="courseName" required><br/>
     <label for="semester">Semester:</label>
@@ -40,7 +39,7 @@
         <option value="1">Semester 1</option>
         <option value="2">Semester 2</option>
     </select><br/>
-<%--    <input type="text" id="semester" name="semester" required><br/>--%>
+    <%--    <input type="text" id="semester" name="semester" required><br/>--%>
     <input type="submit" value="Create Course">
     <br>
 
@@ -48,4 +47,3 @@
 </form>
 </body>
 </html>
-

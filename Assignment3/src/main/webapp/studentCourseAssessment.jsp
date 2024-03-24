@@ -8,8 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.assignment3.Entity.Assessment" %>
-<%@ page import="com.assignment3.service.student.StudentService" %>
+<%@ page import="com.assignment3.service.UserService.UserService" %>
 <%@ page import="com.assignment3.service.student.StudentCheckCourseMarksServlet" %>
+<%@ page import="com.assignment3.service.UserService.UserService" %>
 <html>
 <head>
     <title>Course Assessments</title>
@@ -26,7 +27,7 @@
     String username = (String)requestSession.getAttribute("userName");
 
     // get assessments:
-    StudentService studentService = new StudentService();
+    UserService studentService = new UserService();
     List<Assessment> assessments = studentService.getAssessmentByCourseIdAndUserName(username, courseId1);
 //    SELECT c.course_name,a.assessment_type, u.username, a.marks
 %>

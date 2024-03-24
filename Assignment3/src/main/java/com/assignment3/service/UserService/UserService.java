@@ -1,4 +1,4 @@
-package com.assignment3.service.student;
+package com.assignment3.service.UserService;
 
 import com.assignment3.Entity.Assessment;
 import com.assignment3.Entity.Course;
@@ -7,10 +7,9 @@ import com.assignment3.Entity.UserCourse;
 
 import javax.persistence.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class StudentService {
+public class UserService {
     // JPA:
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("example-unit");
     public List<Course> getEnrolledCoursesByUserName(String userName) throws SQLException {
@@ -136,6 +135,13 @@ public class StudentService {
         em.close();
         return course;
     }
+
+    /**
+     * For students to get their assessment results.
+     * @param userName
+     * @param courseId
+     * @return
+     */
     public List<Assessment> getAssessmentByCourseIdAndUserName(String userName, Long courseId){
         EntityManager em = emf.createEntityManager();
         try {
@@ -143,7 +149,7 @@ public class StudentService {
             String sql = "SELECT * FROM Assessment a " +
                     "JOIN course c ON a.course_id = c.course_id " +
                     "JOIN user u ON u.user_id = a.user_id " +
-                    "WHERE u.username = ? and a.course_id = ?";
+                    "WHERE u.username = ? and a.course_id = ? and u.role = 'student'";
             // Create a native query
             Query query = em.createNativeQuery(sql, Assessment.class);
             query.setParameter(1, userName);
@@ -153,6 +159,25 @@ public class StudentService {
             @SuppressWarnings("unchecked")
             List<Assessment> assessments = query.getResultList();
             return assessments;
+        } finally {
+            em.close();
+        }
+    }
+    public List<UserCourse> getStudentsByCourseId(Long courseId){
+        EntityManager em = emf.createEntityManager();
+        try {
+            // Native SQL query
+            String sql = "SELECT * FROM UserCourse uc " +
+                    "join MY_DB.User u on uc.user_id = u.user_id " +
+                    "WHERE u.role = 'student' and uc.course_id = ?";
+            // Create a native query
+            Query query = em.createNativeQuery(sql, UserCourse.class);
+            query.setParameter(1, courseId);
+
+            // Execute the query and get the result list
+            @SuppressWarnings("unchecked")
+            List<UserCourse> students = query.getResultList();
+            return students;
         } finally {
             em.close();
         }

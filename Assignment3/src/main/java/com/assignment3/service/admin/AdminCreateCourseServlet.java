@@ -46,8 +46,8 @@ public class AdminCreateCourseServlet extends HttpServlet {
             out.println("<html><body>");
 
             out.println("<h1>Successfully creat the course: </h1>");
-            out.println("<h2> semester: " + semester + "</h1>");
-            out.println("<h1> course name: " + courseName + "</h1>");
+            out.println("<h2> semester: " + semester + "</h2>");
+            out.println("<h2> course name: " + courseName + "</h2>");
             out.println("<a href=\"adminDashboard.jsp\">Back to Dashboard</a>");
 
             out.println("</body></html>");

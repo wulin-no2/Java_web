@@ -56,10 +56,10 @@ public class AdminCreateUserServlet extends HttpServlet {
             adminService.addUser(userName, password,name,phone,role);
             out.println("<html><body>");
             out.println("<h1>Successfully creat the user: </h1>");
-            out.println("<h2> username: " + userName + "</h1>");
-            out.println("<h1> name: " + name + "</h1>");
-            out.println("<h1> phone: " + phone + "</h1>");
-            out.println("<h1> role: " + role + "</h1>");
+            out.println("<h2> username: " + userName + "</h2>");
+            out.println("<h2> name: " + name + "</h2>");
+            out.println("<h2> phone: " + phone + "</h2>");
+            out.println("<h2> role: " + role + "</h2>");
             out.println("<a href=\"adminDashboard.jsp\">Back to Dashboard</a>");
 
             out.println("</body></html>");

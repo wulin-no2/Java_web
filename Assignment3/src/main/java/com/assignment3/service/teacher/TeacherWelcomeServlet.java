@@ -1,4 +1,4 @@
-package com.assignment3.service.lecturer;
+package com.assignment3.service.teacher;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,8 +12,8 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class WelcomeServlet
  */
-@WebServlet("/LecturerWelcomeServlet")
-public class LecturerWelcomeServlet extends HttpServlet {
+@WebServlet("/TeacherWelcomeServlet")
+public class TeacherWelcomeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

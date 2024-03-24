@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userName",userName);
 			System.out.println(session.getAttribute("userName"));
 //			This is lecturer system:
-			response.sendRedirect("LecturerWelcomeServlet");
+			response.sendRedirect("teacherDashboard.jsp");
 		} else{
     		out.print("Wrong username or password. <br/><br/>");
     		RequestDispatcher requestDispatcher = 
