@@ -1,3 +1,6 @@
+<%@ page import="com.assignment3.Entity.Assessment" %>
+<%@ page import="com.assignment3.service.UserService.UserService" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,42 +11,71 @@
 <body>
 <h2>Assessment of the student</h2>
 
-<!-- Create New User Form -->
-<form action="/Assignment3_war_exploded/TeacherAddAssessmentServlet" method="post">
-    <label for="role">Role:</label>
-    <select id="role" name="role">
-        <option value="student">Student</option>
-        <option value="teacher">Teacher</option>
-    </select><br/>
-    <label for="userName">Username:</label>
-    <input type="text" id="userName" name="userName" required><br/>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br/>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br/>
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone" required><br/>
-    <input type="submit" value="Create User">
-</form>
+<!-- Create Student Course Assessment Form -->
+<%
+    //get parameters from request object.
+    String courseIdString = request.getParameter("courseId");
+    Long courseId1 = Long.parseLong(courseIdString);
+    String studentName = request.getParameter("userName");
+//    Long courseId = Long.parseLong(request.getParameter("courseId"));
+//    HttpSession requestSession = request.getSession();
+//    String username = (String)requestSession.getAttribute("userName");
 
-<!-- Create New Course Form -->
-<h3>Create New Course</h3>
-<form action="/Assignment3_war_exploded/AdminCreateCourseServlet" method="post">
+    // get assessments:
+    UserService userService = new UserService();
+    List<Assessment> assessments = userService.getAssessmentByCourseIdAndUserName(studentName, courseId1);
+//    SELECT c.course_name,a.assessment_type, u.username, a.marks
+%>
+
+<table border="1">
+    <thead>
+    <tr><th>Course ID</th>
+        <th>Course Name</th>
+        <th>Assessment Type</th>
+        <th>Student ID</th>
+        <th>Student Name</th>
+        <th>Marks</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(Assessment assessment : assessments) { %>
+    <tr>
+        <td><%= assessment.getCourse().getCourseId() %></td>
+        <td><%= assessment.getCourse().getCourseName() %></td>
+        <td><%= assessment.getAssessmentType() %></td>
+        <td><%= assessment.getUser().getUserId() %></td>
+        <td><%= assessment.getUser().getUsername() %></td>
+        <td><%= assessment.getMarks()%></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
+
+
+<!-- Create Assessment Form -->
+<h2>Update Student Assessment</h2>
+<form action="/Assignment3_war_exploded/TeacherAddAssessmentServlet" method="post">
     <%--    <label for="courseId">Course ID:</label>--%>
     <%--    <input type="text" id="courseId" name="courseId" required><br/>--%>
-    <label for="courseName">Course Name:</label>
-    <input type="text" id="courseName" name="courseName" required><br/>
-    <label for="semester">Semester:</label>
-    <label for="semester">Semester:</label>
-    <select id="semester" name="semester" required>
-        <option value="1">Semester 1</option>
-        <option value="2">Semester 2</option>
-    </select><br/>
-    <%--    <input type="text" id="semester" name="semester" required><br/>--%>
-    <input type="submit" value="Create Course">
-    <br>
-
-    <a href="/Assignment3_war_exploded/logout">log out</a>
+<%--    <label for="assessmentType">Assessment Type:</label>--%>
+<%--    <label for="assessmentType">Assessment Type:</label>--%>
+<%--    <select id="assessmentType" name="assessmentType" required>--%>
+<%--        <option value="exam">final Exam</option>--%>
+<%--        <option value="assignment">Assignment</option>--%>
+<%--        <option value="quiz">quiz</option>--%>
+<%--    </select>--%>
+    <label for="assignmentMark">Assignment mark:</label>
+    <input type="text" id="assignmentMark" name="assignmentMark" required><br/>
+    <label for="quizMark">Quiz mark:</label>
+    <input type="text" id="quizMark" name="quizMark" required><br/>
+    <label for="examMark">Final exam mark:</label>
+    <input type="text" id="examMark" name="examMark" required><br/>
+    <input type="hidden" name="studentName" value="<%=studentName%>">
+    <input type="hidden" name="courseId1" value="<%=courseId1%>">
+        <br/>
+    <input type="submit" value="Update Assessment">
 </form>
+<br>
+<a href="teacherDashboard.jsp">Back to teacher dashboard</a>
 </body>
 </html>

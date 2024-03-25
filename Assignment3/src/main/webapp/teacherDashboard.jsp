@@ -55,31 +55,31 @@
     </table>
         <% } %>
 
-    <h3>Available Courses</h3>
-    <p>Select a course to register:</p>
-    <table border="1">
-        <tr>
-            <th>Course ID</th>
-            <th>Course Name</th>
-            <th>Semester</th>
-            <th>Operation</th>
-        </tr>
-        <% for(Course course : availableCourses){ %>
-        <tr>
-            <td><%= course.getCourseId() %></td>
-            <td><%= course.getCourseName() %></td>
-            <td>Semester <%= course.getSemester() %></td>
-            <td>
-                <form action="UserRegisterCourseServlet" method="post">
-                    <input type="hidden" name="courseId" value="<%= course.getCourseId() %>">
-                    <input type="submit" value="Register">
-                </form>
-            </td>
-        </tr>
-        <% } %>
-    </table>
+<h3>Available Courses</h3>
+<p>Select a course to register:</p>
+<table border="1">
+    <tr>
+        <th>Course ID</th>
+        <th>Course Name</th>
+        <th>Semester</th>
+        <th>Operation</th>
+    </tr>
+    <% for(Course course : availableCourses){ %>
+    <tr>
+        <td><%= course.getCourseId() %></td>
+        <td><%= course.getCourseName() %></td>
+        <td>Semester <%= course.getSemester() %></td>
+        <td>
+            <form action="UserRegisterCourseServlet" method="post">
+                <input type="hidden" name="courseId" value="<%= course.getCourseId() %>">
+                <input type="submit" value="Register">
+            </form>
+        </td>
+    </tr>
+    <% } %>
+</table>
 
-    <br>
+<br>
 
     <a href="/Assignment3_war_exploded/logout">log out</a>
 </body>

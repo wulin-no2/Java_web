@@ -17,9 +17,7 @@ public class TeacherShowAssessmentServlet extends HttpServlet {
         response.setContentType("text/html");
         System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
-        RequestDispatcher requestDispatcher =
-                request.getRequestDispatcher("teacherShowAssessment.jsp");
-        requestDispatcher.include(request, response);
+
 
     }
 
@@ -29,6 +27,9 @@ public class TeacherShowAssessmentServlet extends HttpServlet {
         response.setContentType("text/html");
         System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
+        RequestDispatcher requestDispatcher =
+                request.getRequestDispatcher("teacherShowAssessment.jsp");
+        requestDispatcher.include(request, response);
 
     }
 }

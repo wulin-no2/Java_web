@@ -137,7 +137,7 @@ public class UserService {
     }
 
     /**
-     * For students to get their assessment results.
+     * get  assessment results of a student.
      * @param userName
      * @param courseId
      * @return
@@ -181,5 +181,51 @@ public class UserService {
         } finally {
             em.close();
         }
+    }
+    public void updateStudentAssessment(String userName, Long courseId, int assignmentMark, int quizMark, int examMark){
+        EntityManager em = emf.createEntityManager();
+        if (getAssessmentByCourseIdAndUserName(userName, courseId).isEmpty()){
+            // Begin transaction
+            em.getTransaction().begin();
+
+            Assessment assessment1 = new Assessment(getUserByUserName(userName), getCourseByCourseId(courseId), (long) assignmentMark,"assignment");
+            Assessment assessment2 = new Assessment(getUserByUserName(userName), getCourseByCourseId(courseId), (long) quizMark,"quiz");
+            Assessment assessment3 = new Assessment(getUserByUserName(userName), getCourseByCourseId(courseId), (long) examMark,"exam");
+            em.persist(assessment1);
+            em.persist(assessment2);
+            em.persist(assessment3);
+
+            // commit
+            em.getTransaction().commit();
+
+        }
+        else {
+            // Begin transaction
+            em.getTransaction().begin();
+
+            // Native SQL query
+            String sql =  "UPDATE Assessment a " +
+                    "SET a.marks = CASE a.assessment_type " +
+                    "                WHEN 'assignment' THEN ? " +
+                    "                WHEN 'quiz' THEN ? " +
+                    "                WHEN 'exam' THEN ? " +
+                    "              END " +
+                    "WHERE user_id = ? and course_id = ? " +
+                    "AND a.assessment_type IN ('assignment', 'quiz', 'exam')";
+//                String sql = "SELECT * FROM UserCourse uc " +
+//                        "join MY_DB.User u on uc.user_id = u.user_id " +
+//                        "WHERE u.role = 'student' and uc.course_id = ?";
+            // Create a native query
+            Query query = em.createNativeQuery(sql);
+            query.setParameter(1, assignmentMark);
+            query.setParameter(2, quizMark);
+            query.setParameter(3, examMark);
+            query.setParameter(4, getUserByUserName(userName).getUserId());
+            query.setParameter(5, courseId);
+
+            query.executeUpdate();
+            em.getTransaction().commit(); // Commit transaction
+        }
+        em.close();
     }
 }

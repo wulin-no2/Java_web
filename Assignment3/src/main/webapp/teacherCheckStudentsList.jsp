@@ -54,6 +54,7 @@
         <td>
             <form action="TeacherShowAssessmentServlet" method="post">
                 <input type="hidden" name="userName" value="<%= student.getUser().getUsername() %>">
+                <input type="hidden" name="courseId" value="<%= student.getCourse().getCourseId() %>">
                 <input type="submit" value="Add Assessment">
             </form>
         </td>
