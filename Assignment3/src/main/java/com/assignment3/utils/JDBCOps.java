@@ -1,4 +1,4 @@
-package com.assignment3.Utils;
+package com.assignment3.utils;
 
 import java.sql.*;
 

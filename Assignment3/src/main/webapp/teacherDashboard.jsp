@@ -1,7 +1,7 @@
-<%@ page import="com.assignment3.Entity.Course" %>
+<%@ page import="com.assignment3.entity.Course" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.assignment3.service.UserService.UserService" %>
-<%@ page import="com.assignment3.service.UserService.UserService" %>
+<%@ page import="com.assignment3.service.userService.UserService" %>
+<%@ page import="com.assignment3.service.userService.UserService" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%--
   Created by IntelliJ IDEA.

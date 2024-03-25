@@ -1,4 +1,4 @@
-package com.assignment3.Utils;
+package com.assignment3.utils;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;

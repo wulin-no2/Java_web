@@ -1,4 +1,4 @@
-package com.assignment3.Entity;
+package com.assignment3.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;

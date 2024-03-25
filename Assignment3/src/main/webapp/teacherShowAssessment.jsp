@@ -1,5 +1,5 @@
-<%@ page import="com.assignment3.Entity.Assessment" %>
-<%@ page import="com.assignment3.service.UserService.UserService" %>
+<%@ page import="com.assignment3.entity.Assessment" %>
+<%@ page import="com.assignment3.service.userService.UserService" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

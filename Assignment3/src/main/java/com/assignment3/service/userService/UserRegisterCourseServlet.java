@@ -1,6 +1,5 @@
-package com.assignment3.service.UserService;
+package com.assignment3.service.userService;
 
-import com.assignment3.service.UserService.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

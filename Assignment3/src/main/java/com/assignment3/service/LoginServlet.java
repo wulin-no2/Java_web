@@ -1,5 +1,6 @@
 package com.assignment3.service;
 
+import com.assignment3.service.userService.UserService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,8 +38,11 @@ public class LoginServlet extends HttpServlet {
     		request.getParameter("userName").trim();
     	String password = 
     		request.getParameter("password").trim();
- 
-    	//check for null and empty values.
+		// check user type;
+		UserService userService = new UserService();
+		String role = userService.getUserByUserName(userName).getRole();
+
+		//check for null and empty values.
     	if(userName == null || userName.equals("") 
     			|| password == null || password.equals("")){
     		out.print("Please enter both username " +

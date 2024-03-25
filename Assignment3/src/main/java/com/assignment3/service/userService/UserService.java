@@ -1,9 +1,9 @@
-package com.assignment3.service.UserService;
+package com.assignment3.service.userService;
 
-import com.assignment3.Entity.Assessment;
-import com.assignment3.Entity.Course;
-import com.assignment3.Entity.User;
-import com.assignment3.Entity.UserCourse;
+import com.assignment3.entity.Assessment;
+import com.assignment3.entity.Course;
+import com.assignment3.entity.User;
+import com.assignment3.entity.UserCourse;
 
 import javax.persistence.*;
 import java.sql.*;

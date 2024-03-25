@@ -1,7 +1,7 @@
 package com.assignment3.service.admin;
 
-import com.assignment3.Entity.Course;
-import com.assignment3.Entity.User;
+import com.assignment3.entity.Course;
+import com.assignment3.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

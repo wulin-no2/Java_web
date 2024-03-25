@@ -1,6 +1,6 @@
 package com.assignment3.service.teacher;
 
-import com.assignment3.service.UserService.UserService;
+import com.assignment3.service.userService.UserService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 
 @WebServlet(name = "TeacherAddAssessmentServlet", value = "/TeacherAddAssessmentServlet")
 public class TeacherAddAssessmentServlet extends HttpServlet {

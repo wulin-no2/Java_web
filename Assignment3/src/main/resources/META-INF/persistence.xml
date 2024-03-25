@@ -4,10 +4,10 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="example-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.assignment3.Entity.Course</class>
-        <class>com.assignment3.Entity.User</class>
-        <class>com.assignment3.Entity.UserCourse</class>
-        <class>com.assignment3.Entity.Assessment</class>
+        <class>com.assignment3.entity.Course</class>
+        <class>com.assignment3.entity.User</class>
+        <class>com.assignment3.entity.UserCourse</class>
+        <class>com.assignment3.entity.Assessment</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/MY_DB"/>

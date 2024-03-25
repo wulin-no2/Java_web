@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.assignment3.Entity.Assessment" %>
-<%@ page import="com.assignment3.service.UserService.UserService" %>
+<%@ page import="com.assignment3.entity.Assessment" %>
+<%@ page import="com.assignment3.service.userService.UserService" %>
 <%@ page import="com.assignment3.service.student.StudentCheckCourseMarksServlet" %>
-<%@ page import="com.assignment3.service.UserService.UserService" %>
+<%@ page import="com.assignment3.service.userService.UserService" %>
 <html>
 <head>
     <title>Course Assessments</title>

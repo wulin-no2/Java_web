@@ -1,4 +1,4 @@
-package com.assignment3;
+package com.assignment3.service;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
