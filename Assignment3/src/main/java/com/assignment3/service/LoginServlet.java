@@ -1,5 +1,6 @@
 package com.assignment3.service;
 
+import com.assignment3.entity.User;
 import com.assignment3.service.userService.UserService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -39,9 +40,13 @@ public class LoginServlet extends HttpServlet {
     	String password = 
     		request.getParameter("password").trim();
 		// check user type;
-		UserService userService = new UserService();
-		String role = userService.getUserByUserName(userName).getRole();
-
+		String role = null;
+		if (!userName.equals("") && !userName.equals("admin")){
+			UserService userService = new UserService();
+			User userByUserName = userService.getUserByUserName(userName);
+			role = userByUserName.getRole();
+			session.setAttribute("role", role);
+		}
 		//check for null and empty values.
     	if(userName == null || userName.equals("") 
     			|| password == null || password.equals("")){
@@ -51,18 +56,18 @@ public class LoginServlet extends HttpServlet {
     			request.getRequestDispatcher("/login.html");
     		requestDispatcher.include(request, response);
     	}//Check for valid username and password.
-    	else if(userName.equals("student") && password.equals("student")){
+		else if (userName.equals("admin") && password.equals("admin")) {
+			session.setAttribute("userName",userName);
+			System.out.println(session.getAttribute("userName"));
+			response.sendRedirect("adminDashboard.jsp");
+		}
+		else if(role!=null && role.equals("student")){
 			session.setAttribute("userName",userName);
 			System.out.println(session.getAttribute("userName"));
 //			This is student result:
     		response.sendRedirect("studentDashboard.jsp");
-    	} else if (userName.equals("admin") && password.equals("admin")) {
-			session.setAttribute("userName",userName);
-			System.out.println(session.getAttribute("userName"));
-//			This is admin dashboard:
-//			response.sendRedirect("AdminWelcomeServlet");
-			response.sendRedirect("adminDashboard.jsp");
-		} else if (userName.equals("teacher") && password.equals("teacher")) {
+    	}
+		else if (role!=null && role.equals("teacher")) {
 			session.setAttribute("userName",userName);
 			System.out.println(session.getAttribute("userName"));
 //			This is lecturer system:

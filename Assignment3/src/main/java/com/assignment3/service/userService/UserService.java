@@ -91,6 +91,9 @@ public class UserService {
     }
     public void registerCourse(String userName, Long courseId){
         EntityManager em = emf.createEntityManager();
+        if (getUserCourseByCourseIdAndUserName(userName,courseId))
+            return;
+
         // Begin transaction
         em.getTransaction().begin();
         User user = getUserByUserName(userName);
@@ -135,6 +138,23 @@ public class UserService {
         em.close();
         return course;
     }
+    public Boolean getUserCourseByCourseIdAndUserName(String userName, Long courseId){
+        EntityManager em = emf.createEntityManager();
+
+        try{
+            Long userId = getUserByUserName(userName).getUserId();
+            String sql = "select count(*) from UserCourse " +
+                    "where UserCourse.user_id = ? and course_id = ? ";
+            Query query = em.createNativeQuery(sql);
+            query.setParameter(1, userId);
+            query.setParameter(2, courseId);
+            Number count = (Number)query.getSingleResult();
+            return count.intValue() > 0;
+        }finally {
+            em.close();
+        }
+    }
+
 
     /**
      * get  assessment results of a student.

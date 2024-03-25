@@ -17,13 +17,10 @@ public class TeacherShowAssessmentServlet extends HttpServlet {
         response.setContentType("text/html");
         System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
-
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
         System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();

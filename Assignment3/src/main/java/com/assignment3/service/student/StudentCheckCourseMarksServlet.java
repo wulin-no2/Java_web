@@ -20,9 +20,6 @@ public class StudentCheckCourseMarksServlet extends HttpServlet {
         RequestDispatcher requestDispatcher =
                 request.getRequestDispatcher("studentCourseAssessment.jsp");
         requestDispatcher.include(request, response);
-//        response.sendRedirect("studentCourseAssessment.jsp");
-//        out.append("Served at: ").append(request.getContextPath());
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

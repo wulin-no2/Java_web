@@ -29,6 +29,7 @@ public class UserRegisterCourseServlet extends HttpServlet {
         Long courseId = Long.parseLong(request.getParameter("courseId"));
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("userName");
+        String role = (String)session.getAttribute("role");
 
         //add user course;
         UserService userService = new UserService();
@@ -36,12 +37,12 @@ public class UserRegisterCourseServlet extends HttpServlet {
             out.println("<html><body>");
 
             out.println("<h1>Successfully register the course: </h1>");
-            out.println("<h2> course information: " + userService.getCourseByCourseId(Long.valueOf(courseId)).toString() + "</h2>");
-            if (username.equals("student")){
-                out.println("<a href=\"studentDashboard.jsp\">Back to Dashboard</a>");
+            out.println("<h2> course information: " + userService.getCourseByCourseId(courseId).toString() + "</h2>");
+            if (role.equals("student")){
+                out.println("<a href=\"studentDashboard.jsp\">Back to student Dashboard</a>");
             }
-            if (username.equals("teacher")){
-                out.println("<a href=\"teacherDashboard.jsp\">Back to Dashboard</a>");
+            if (role.equals("teacher")){
+                out.println("<a href=\"teacherDashboard.jsp\">Back to teacher Dashboard</a>");
             }
             out.println("</body></html>");
     }

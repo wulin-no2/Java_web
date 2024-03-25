@@ -17,7 +17,4 @@ public class JDBCOps {
 //        }
 //        con.close();
     }
-
-
-
 }

@@ -50,7 +50,7 @@ public class TeacherAddAssessmentServlet extends HttpServlet {
 
             out.println("<html><body>");
             out.println("<h1>Successfully update the assessment result. </h1>");
-            out.println("<a href=\"teacherDashboard.jsp\">Back to Dashboard</a>");
+            out.println("<a href=\"teacherDashboard.jsp\">Back to teacher Dashboard</a>");
 
             out.println("</body></html>");
 
