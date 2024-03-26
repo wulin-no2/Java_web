@@ -8,15 +8,19 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Servlet implementation class LogoutServlet. Jump to login page.
+ */
+
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Invalidate the session, removing any session data
+        // Invalidate the session:
         request.getSession().invalidate();
 
-        // Redirect to the login page or home page after logout
-        response.sendRedirect("login.html"); // return login page;
+        // Redirect to the login page after logout:
+        response.sendRedirect("login.html");
     }
 }
 

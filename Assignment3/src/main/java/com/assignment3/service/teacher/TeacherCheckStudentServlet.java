@@ -10,12 +10,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Servlet for teacher to get the students list for the specific course.
+ * jump to a jsp.
+ */
 @WebServlet(name = "TeacherCheckStudentServlet", value = "/TeacherCheckStudentServlet")
 public class TeacherCheckStudentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //System.out.println("====================post method is running====================");
         response.setContentType("text/html");
-        System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
         RequestDispatcher requestDispatcher =
                 request.getRequestDispatcher("teacherCheckStudentsList.jsp");
@@ -25,9 +29,7 @@ public class TeacherCheckStudentServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
-        System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
 
     }

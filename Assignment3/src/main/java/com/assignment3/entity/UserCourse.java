@@ -2,32 +2,26 @@ package com.assignment3.entity;
 
 import javax.persistence.*;
 
+/**
+ * UserCourse entity. Many-to-one relationship with User and Course.
+ */
 @Entity
 @Table(name = "UserCourse")
 public class UserCourse {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_course_id")
     private Long userCourseId;
-//    @Column(name = "course_id")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-//    @Column(name = "user_id")
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
-
-//    public UserCourse(Long courseId, Long userId) {
-//        this.courseId = courseId;
-//        this.userId = userId;
-//    }
-
 
     public UserCourse(User user, Course course) {
         this.user = user;
         this.course = course;
     }
-
     public UserCourse() {
     }
     public Long getUserCourseId() {

@@ -30,8 +30,6 @@
 <!-- Create New Course Form -->
 <h3>Create New Course</h3>
 <form action="/Assignment3_war_exploded/AdminCreateCourseServlet" method="post">
-<%--    <label for="courseId">Course ID:</label>--%>
-<%--    <input type="text" id="courseId" name="courseId" required><br/>--%>
     <label for="courseName">Course Name:</label>
     <input type="text" id="courseName" name="courseName" required><br/>
     <label for="semester">Semester:</label>
@@ -40,10 +38,9 @@
         <option value="1">Semester 1</option>
         <option value="2">Semester 2</option>
     </select><br/>
-<%--    <input type="text" id="semester" name="semester" required><br/>--%>
     <input type="submit" value="Create Course">
     <br>
-
+    <!-- for the admin to log out -->
     <a href="/Assignment3_war_exploded/logout">log out</a>
 </form>
 </body>

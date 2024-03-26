@@ -21,8 +21,10 @@
 <body>
 <h2>Teacher Dashboard</h2>
 
+<!-- display the dashboard for the teacher -->
 <%-- userName is stored in session after login --%>
 <% String userName = (String) session.getAttribute("userName"); %>
+<%-- use methods from UserService to get the enrolledCourses list and availableCourses list. --%>
 <% UserService teacherService = new UserService(); %>
 <% List<Course> enrolledCourses = teacherService.getEnrolledCoursesByUserName(userName); %>
 <% List<Course> availableCourses = teacherService.getAvailableCoursesByUserName(userName); %>
@@ -30,6 +32,7 @@
 <% if(enrolledCourses.isEmpty()){ %>
 <p>You are not assigned in any courses.</p>
 <% } else { %>
+<!-- display the assigned courses for the teacher in a table-->
 <h3>Assigned Courses</h3>
 <ul>
     <table border="1">
@@ -54,7 +57,7 @@
         <% } %>
     </table>
         <% } %>
-
+    <!-- display the available courses for the teacher in a table-->
 <h3>Available Courses</h3>
 <p>Select a course to register:</p>
 <table border="1">
@@ -80,7 +83,7 @@
 </table>
 
 <br>
-
+    <!-- for the teacher to log out -->
     <a href="/Assignment3_war_exploded/logout">log out</a>
 </body>
 </html>

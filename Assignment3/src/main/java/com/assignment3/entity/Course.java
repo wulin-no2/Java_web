@@ -1,15 +1,17 @@
 package com.assignment3.entity;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Course entity. One-to-many relationship with UserCourse.
+ */
+
 @Entity
 @Table(name = "Course")
 public class Course implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
@@ -20,7 +22,6 @@ public class Course implements Serializable {
     private int semester;
     @OneToMany(mappedBy = "course")
     private Set<UserCourse> userCourses = new HashSet<>();
-
 
     public Course(String courseName, int semester) {
         this.courseName = courseName;

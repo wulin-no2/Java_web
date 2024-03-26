@@ -17,21 +17,19 @@
 </head>
 <body>
 <h2>Course Assessments</h2>
-
+<!-- get the assessments result for the student -->
 <%
-    //get parameters from request object.
+    //get parameters from request object and the session attribute.
     String courseIdString = request.getParameter("courseId");
     Long courseId1 = Long.parseLong(courseIdString);
-//    Long courseId = Long.parseLong(request.getParameter("courseId"));
     HttpSession requestSession = request.getSession();
     String username = (String)requestSession.getAttribute("userName");
 
-    // get assessments:
+    // use a method from UserService to get assessments:
     UserService studentService = new UserService();
     List<Assessment> assessments = studentService.getAssessmentByCourseIdAndUserName(username, courseId1);
-//    SELECT c.course_name,a.assessment_type, u.username, a.marks
 %>
-
+<!-- display the assessments result for the student in a table-->
 <table border="1">
     <thead>
     <tr>
@@ -53,6 +51,7 @@
     </tbody>
 </table>
 <br>
+<!-- for the student to jump to dashboard. -->
 <a href="studentDashboard.jsp">Back to StudentDashboard</a>
 
 </body>

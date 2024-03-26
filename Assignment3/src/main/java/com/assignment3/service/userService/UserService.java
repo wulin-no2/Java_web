@@ -9,9 +9,21 @@ import javax.persistence.*;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * All the methods for users including students and teachers.
+ * Most of the methods are shared and used by all the users.
+ * So we don't create StudentService and TeacherService separately.
+ */
+
 public class UserService {
     // JPA:
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("example-unit");
+
+    /**
+     * a method for students and teachers to get their enrolled or assigned courses by username.
+     * @param userName useName of students or teachers.
+     * @return course list.
+     */
     public List<Course> getEnrolledCoursesByUserName(String userName) throws SQLException {
         EntityManager em = emf.createEntityManager();
         try {
@@ -32,40 +44,13 @@ public class UserService {
         } finally {
             em.close();
         }
-        // JDBC
-//        // Step 1: Get the user_id from the 'user' table based on the provided username.
-//        String getUserIdSql = "SELECT user_id FROM user WHERE username = ${userName}";
-//
-//        // Step 2: Get the list of courses the user is enrolled in from the 'usercourse' table.
-//        String getUserCoursesSql = "SELECT c.course_id, c.course_name, c.semester "
-//                + "FROM course c "
-//                + "JOIN usercourse uc ON c.course_id = uc.course_id "
-//                + "WHERE uc.user_id = ${getUserIdSql}";
-//
-//        // get connection from JDBCOps;
-//        Connection connection = JDBCOps.jdbcConnection();
-//        // Get the user_id
-//            try (PreparedStatement getUserIdStmt = connection.prepareStatement(getUserIdSql)) {
-//                getUserIdStmt.setString(1, userName);
-//                ResultSet userIdRs = getUserIdStmt.executeQuery();
-//                if (userIdRs.next()) {
-//                    Long userId = userIdRs.getLong("user_id");
-//                    // Get the courses using the retrieved user_id
-//                    try (PreparedStatement getUserCoursesStmt = connection.prepareStatement(getUserCoursesSql)) {
-//                        getUserCoursesStmt.setLong(1, userId);
-//                        ResultSet coursesRs = getUserCoursesStmt.executeQuery();
-//                        while (coursesRs.next()) {
-//                            Course course = new Course(coursesRs.getString("course_name"),coursesRs.getInt("semester"));
-//                            courses.add(course);
-//                        }
-//                    }
-//                }
-//            } catch (SQLException e) {
-//            // Handle exceptions, possibly logging them and/or rethrowing as appropriate
-//            e.printStackTrace();
-//        }
-//        return courses;
     }
+
+    /**
+     * a method for students and teachers to get their unregistered courses by username.
+     * @param userName useName of students or teachers.
+     * @return course list.
+     */
     public List<Course> getAvailableCoursesByUserName(String userName){
         EntityManager em = emf.createEntityManager();
         try {
@@ -89,6 +74,12 @@ public class UserService {
             em.close();
         }
     }
+
+    /**
+     * a method for students and teachers to register a course by courseId.
+     * @param userName useName of a student or a teacher.
+     * @param courseId courseId of an unregistered course.
+     */
     public void registerCourse(String userName, Long courseId){
         EntityManager em = emf.createEntityManager();
         if (getUserCourseByCourseIdAndUserName(userName,courseId))
@@ -116,7 +107,12 @@ public class UserService {
         // Close EntityManager and EntityManagerFactory
         em.close();
     }
-    // used to get user and course for other methods to use;
+
+    /**
+     * a helper method to help get User object by username.
+     * @param userName userName of a student or a teacher.
+     * @return the User object. Maybe teacher or student.
+     */
     public User getUserByUserName(String userName){
         EntityManager em = emf.createEntityManager();
         try {
@@ -131,6 +127,12 @@ public class UserService {
             em.close(); // Only close the EntityManager here
         }
     }
+
+    /**
+     * a helper method to help get Course object by courseId.
+     * @param courseId courseId of a course.
+     * @return the Course object.
+     */
     public Course getCourseByCourseId(Long courseId){
         EntityManager em = emf.createEntityManager();
         Course course = em.find(Course.class, courseId);
@@ -138,6 +140,14 @@ public class UserService {
         em.close();
         return course;
     }
+
+    /**
+     * a helper method to help check if there exist a UserCourse object by username and courseId.
+     * a course can only be registered by a user for once.
+     * @param userName userName of a student or a teacher.
+     * @param courseId courseId of a course.
+     * @return if the UserCourse object exists.
+     */
     public Boolean getUserCourseByCourseIdAndUserName(String userName, Long courseId){
         EntityManager em = emf.createEntityManager();
 
@@ -154,8 +164,6 @@ public class UserService {
             em.close();
         }
     }
-
-
     /**
      * get  assessment results of a student.
      * @param userName
@@ -183,6 +191,12 @@ public class UserService {
             em.close();
         }
     }
+
+    /**
+     * a method to get UserCourse list by a courseId. So that we can get students list registered the course.
+     * @param courseId courseId of a course.
+     * @return UserCourse list.
+     */
     public List<UserCourse> getStudentsByCourseId(Long courseId){
         EntityManager em = emf.createEntityManager();
         try {
@@ -202,6 +216,16 @@ public class UserService {
             em.close();
         }
     }
+
+    /**
+     * a method for teacher to update assessments of a student for a specific course.
+     * a student can only have one assignment mark, one quiz mark, and one exam mark.
+     * @param userName username of a student.
+     * @param courseId courseId of a course.
+     * @param assignmentMark the mark for the assignment of the course.
+     * @param quizMark the mark for the quiz of the course.
+     * @param examMark the mark for the exam of the course.
+     */
     public void updateStudentAssessment(String userName, Long courseId, int assignmentMark, int quizMark, int examMark){
         EntityManager em = emf.createEntityManager();
         if (getAssessmentByCourseIdAndUserName(userName, courseId).isEmpty()){

@@ -2,6 +2,10 @@ package com.assignment3.entity;
 
 import javax.persistence.*;
 
+/**
+ * Assignment entity.
+ * Many-to-one relationship with User and Course.
+ */
 @Entity
 @Table(name = "Assessment")
 public class Assessment {
@@ -11,11 +15,9 @@ public class Assessment {
     private Long assessmentId;
     @ManyToOne
     @JoinColumn(name = "user_id")
-//    @Column(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "course_id")
-//    @Column(name = "course_id")
     private Course course;
     @Column(name = "marks")
     private Long marks;

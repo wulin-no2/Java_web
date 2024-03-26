@@ -10,7 +10,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+/**
+ * Servlet for teacher to update the assessments of a student for the specific course.
+ * jump to a jsp.
+ */
 @WebServlet(name = "TeacherAddAssessmentServlet", value = "/TeacherAddAssessmentServlet")
 public class TeacherAddAssessmentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -21,8 +24,8 @@ public class TeacherAddAssessmentServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        System.out.println("====================post method is running====================");
         response.setContentType("text/html");
-        System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
 
         //get parameters from request object.
@@ -43,15 +46,14 @@ public class TeacherAddAssessmentServlet extends HttpServlet {
             int aMark= Integer.parseInt(assignmentMark);
             int qMark = Integer.parseInt(quizMark);
             int eMark = Integer.parseInt(examMark);
-
-            //
+            // update the assessments by a method in UserService.
             UserService userService = new UserService();
             userService.updateStudentAssessment(studentName,courseId,aMark,qMark,eMark);
 
+            //show the result and jump to the teacher dashboard.
             out.println("<html><body>");
             out.println("<h1>Successfully update the assessment result. </h1>");
             out.println("<a href=\"teacherDashboard.jsp\">Back to teacher Dashboard</a>");
-
             out.println("</body></html>");
 
         } catch (NumberFormatException e) {

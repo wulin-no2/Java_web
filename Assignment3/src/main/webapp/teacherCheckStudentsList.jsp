@@ -24,14 +24,14 @@
     //get parameters from request object.
     String courseIdString = request.getParameter("courseId");
     Long courseId1 = Long.parseLong(courseIdString);
-    HttpSession requestSession = request.getSession();
-    String username = (String)requestSession.getAttribute("userName");
+//    HttpSession requestSession = request.getSession();
+//    String username = (String)requestSession.getAttribute("userName");
 
-    // get students:
+    //use methods from UserService to get the enrolledCourses list and availableCourses list.
     UserService teacherService = new UserService();
     List<UserCourse> students = teacherService.getStudentsByCourseId(courseId1);
 %>
-
+<!-- display the students list for the teacher in a table-->
 <table border="1">
     <thead>
     <tr>

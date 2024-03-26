@@ -10,6 +10,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Servlet for user to register a new course.
+ * Both students and teachers can use it.
+ */
+
 @WebServlet(name = "UserRegisterCourseServlet", value = "/UserRegisterCourseServlet")
 public class UserRegisterCourseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -20,22 +25,23 @@ public class UserRegisterCourseServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+//        System.out.println("====================post method is running====================");
         response.setContentType("text/html");
-        System.out.println("====================post method is running====================");
         PrintWriter out = response.getWriter();
 
-        //get parameters from request object.
+        //get parameters from request object to see which user in role is ready to register which course.
         Long courseId = Long.parseLong(request.getParameter("courseId"));
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("userName");
         String role = (String)session.getAttribute("role");
 
-        //add user course;
+        //register the course with a method in UserService;
         UserService userService = new UserService();
         userService.registerCourse(username,courseId);
-            out.println("<html><body>");
 
+        //show the result and jump to the dashboard according the role.
+        // we can get the role from session attribute.
+            out.println("<html><body>");
             out.println("<h1>Successfully register the course: </h1>");
             out.println("<h2> course information: " + userService.getCourseByCourseId(courseId).toString() + "</h2>");
             if (role.equals("student")){

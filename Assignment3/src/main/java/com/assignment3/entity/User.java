@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * User entity. One-to-many entity with UserCourse.
+ */
 @Entity
 @Table(name = "User")
 public class User {

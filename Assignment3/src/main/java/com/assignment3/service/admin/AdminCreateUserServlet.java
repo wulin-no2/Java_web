@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
+/**
+ * Servlet for the admin to create a new user.
+ */
 @WebServlet(name = "AdminCreateUserServlet", value = "/AdminCreateUserServlet")
 public class AdminCreateUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -21,9 +23,8 @@ public class AdminCreateUserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AdminService adminService = new AdminService();
+//        System.out.println("==================== Admin create user post method is running====================");
         response.setContentType("text/html");
-        System.out.println("==================== Admin create user post method is running====================");
         PrintWriter out = response.getWriter();
 
         //get parameters from request object.
@@ -44,16 +45,19 @@ public class AdminCreateUserServlet extends HttpServlet {
                 || name == null || name.equals("")
                 || phone == null || phone.equals("")
                 || role == null || role.equals("")
-
         ){
+            // display the error message and let the admin jump to dashboard.
             out.print("Please enter all the information about the user. " +
                     ". <br/><br/>");
             RequestDispatcher requestDispatcher =
                     request.getRequestDispatcher("adminDashboard.jsp");
             requestDispatcher.include(request, response);
-        }//Check for valid username and password;
+        }
+        //Check for valid username and password;
         else{
+            AdminService adminService = new AdminService();
             adminService.addUser(userName, password,name,phone,role);
+            // display the successful result and let the admin jump to dashboard.
             out.println("<html><body>");
             out.println("<h1>Successfully creat the user: </h1>");
             out.println("<h2> username: " + userName + "</h2>");
